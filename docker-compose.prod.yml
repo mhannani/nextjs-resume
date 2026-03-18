@@ -1,0 +1,40 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+      cache_from:
+        - mhannani-resume-prod:latest
+    image: mhannani-resume-prod:latest
+    container_name: resume_prod
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: 1
+      NEXT_PUBLIC_APP_URL: https://resume.mhannani.me
+      HOSTNAME: "0.0.0.0"
+      PORT: "3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mhannani-resume.rule=Host(`resume.mhannani.me`)"
+      - "traefik.http.routers.mhannani-resume.entrypoints=websecure"
+      - "traefik.http.routers.mhannani-resume.tls.certresolver=letsencrypt"
+      - "traefik.http.services.mhannani-resume.loadbalancer.server.port=3000"
+      - "traefik.http.middlewares.resume-compress.compress=true"
+      - "traefik.http.routers.mhannani-resume.middlewares=resume-compress"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://127.0.0.1:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
