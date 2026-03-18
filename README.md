@@ -139,8 +139,8 @@ cp .env.example .env.local
 
 Upcoming features planned for future releases:
 
-- [ ] **Server-side PDF export** — Puppeteer-based API for generating resume PDFs programmatically
-- [ ] **Cover letter generator** — Create and export professional cover letters as PDF
+- [x] **Server-side PDF export** — Puppeteer-based API for generating resume PDFs programmatically
+- [x] **Cover letter generator** — Create and export professional cover letters as PDF
 - [ ] **Resume tailoring API** — Accept a job description and return a tailored resume
 - [ ] **Dashboard** — Manage resume versions, track applications, and view analytics
 - [ ] **AI-powered matching** — Score resume fit against job descriptions

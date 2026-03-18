@@ -1,4 +1,5 @@
 import { getResumeData } from '@/data'
+import { getTailoredData } from '@/lib/tailored-store'
 import { Header } from '@/components/sections/header'
 import { Contacts } from '@/components/sections/contacts'
 import { Experience } from '@/components/sections/experience'
@@ -20,14 +21,22 @@ export async function generateStaticParams() {
 
 export default async function Home({
   params,
+  searchParams,
 }: {
   params: { locale: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }) {
   if (!i18n.locales.includes(params.locale as Locale)) {
     notFound()
   }
 
-  const resumeData = await getResumeData(params.locale as Locale)
+  let resumeData
+  if (searchParams.tailored === 'true') {
+    const tailored = getTailoredData(params.locale)
+    resumeData = tailored || await getResumeData(params.locale as Locale)
+  } else {
+    resumeData = await getResumeData(params.locale as Locale)
+  }
 
   return (
     <main className="resume-page min-h-screen flex justify-center pt-2 pb-4">
