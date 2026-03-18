@@ -135,6 +135,31 @@ cp .env.example .env.local
 | `NEXT_PUBLIC_APP_URL` | Public URL | `http://localhost:3000` |
 | `NEXT_TELEMETRY_DISABLED` | Disable Next.js telemetry | `1` |
 
+## Roadmap
+
+Upcoming features planned for future releases:
+
+- [ ] **Server-side PDF export** — Puppeteer-based API for generating resume PDFs programmatically
+- [ ] **Cover letter generator** — Create and export professional cover letters as PDF
+- [ ] **Resume tailoring API** — Accept a job description and return a tailored resume
+- [ ] **Dashboard** — Manage resume versions, track applications, and view analytics
+- [ ] **AI-powered matching** — Score resume fit against job descriptions
+- [ ] **Additional languages** — Expand beyond English and German
+- [ ] **Custom themes** — Multiple visual themes and layout options
+
+## Changelog
+
+### v2.0.0 (Current)
+
+- Next.js 14 with App Router and Server Components
+- Multi-language support (EN/DE) with automatic locale detection
+- Dark/Light mode with system preference detection
+- Framer Motion animations
+- PDF export via browser print
+- Docker dev and production setup with Traefik
+- Fully responsive design
+- SEO optimized with Open Graph metadata
+
 ## Author
 
 **Mohamed HANNANI**
